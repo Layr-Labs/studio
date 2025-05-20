@@ -8,9 +8,9 @@ import { SessionDebug } from '@/components/session-debug';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://chat.vercel.ai'),
-  title: 'Vibe AVS Builder',
-  description: 'EigenLayer AVS No Code Builder',
+  metadataBase: new URL('https://studio.eigenlayer.xyz'),
+  title: 'EigenLayer Studio',
+  description: 'EigenLayer No Code Builder',
 };
 
 export const viewport = {
