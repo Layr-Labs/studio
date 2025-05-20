@@ -71,7 +71,7 @@ function PureChatHeader({
             <Button
               variant="outline"
               className="order-3 md:order-2 p-2"
-              onClick={() => window.open('https://github.com/wesfloyd/vibe-avs-builder?tab=readme-ov-file#instructions', '_blank')}
+              onClick={() => window.open('https://github.com/Layr-Labs/studio?tab=readme-ov-file#instructions', '_blank')}
               aria-label="Help / Documentation"
             >
               <InfoIcon size={20} />
