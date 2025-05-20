@@ -1,0 +1,17 @@
+[
+    {
+        "path": "contracts/src/HelloWorldServiceManager.sol",
+        "summary": "Implements HelloWorldServiceManager contract for cat image generation tasks.",
+        "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n// ... contract code ..."
+    },
+    {
+        "path": "contracts/src/IHelloWorldServiceManager.sol",
+        "summary": "Interface for HelloWorldServiceManager with cat image generation methods.",
+        "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n// ... interface code ..."
+    },
+    {
+        "path": "README.md",
+        "summary": "Documentation for the cat image generation AVS.",
+        "content": "# Cat Image Generation AVS\nThis AVS allows users to request and generate cat images."
+    }
+]
