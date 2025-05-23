@@ -1,3 +1,5 @@
+// COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+/*
 import { auth } from '@/app/(auth)/auth';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -33,13 +35,20 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all paths except for:
-     * 1. /api/auth routes
-     * 2. /_next (Next.js internals)
-     * 3. /_static (Static files)
-     * 4. /favicon.ico, /robots.txt, etc.
-     */
+    // Match all paths except for:
+    // 1. /api/auth routes
+    // 2. /_next (Next.js internals)  
+    // 3. /_static (Static files)
+    // 4. /favicon.ico, /robots.txt, etc.
     '/((?!_next|_static|favicon.ico|robots.txt).*)',
   ],
 };
+*/
+
+// NO-AUTH MODE: Allow all requests through without authentication
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  return NextResponse.next();
+}
