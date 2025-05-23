@@ -1,4 +1,5 @@
-import { auth } from '@/app/(auth)/auth';
+// COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+// import { auth } from '@/app/(auth)/auth';
 import type { NextRequest } from 'next/server';
 import { getChatsByUserId } from '@/lib/db/queries';
 
@@ -16,6 +17,8 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   const session = await auth();
 
   if (!session?.user?.id) {
@@ -34,4 +37,8 @@ export async function GET(request: NextRequest) {
   } catch (_) {
     return Response.json('Failed to fetch chats!', { status: 500 });
   }
+  */
+
+  // NO-AUTH MODE: Return empty history for anonymous users
+  return Response.json([]);
 }

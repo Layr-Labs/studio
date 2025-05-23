@@ -2,7 +2,8 @@ import type { UIMessage } from 'ai';
 import {
   LangChainAdapter,
 } from 'ai';
-import { auth } from '@/app/(auth)/auth';
+// COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+// import { auth } from '@/app/(auth)/auth';
 import {
   deleteChatById,
   getChatById,
@@ -36,11 +37,14 @@ export async function POST(request: Request) {
       initialIntent?: UserIntent;
     } = await request.json();
 
+    // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+    /*
     const session = await auth();
 
     if (!session || !session.user || !session.user.id) {
       return new Response('Unauthorized', { status: 401 });
     }
+    */
 
     const userMessage = getMostRecentUserMessage(messages);
 
@@ -49,6 +53,7 @@ export async function POST(request: Request) {
       return new Response('No user message found', { status: 400 });
     }
 
+    // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
     // const chat = await getChatById({ id });
 
     // if (!chat) {
@@ -115,6 +120,8 @@ export async function DELETE(request: Request) {
     return new Response('Not Found for delete', { status: 404 });
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   const session = await auth();
 
   if (!session || !session.user) {
@@ -130,6 +137,18 @@ export async function DELETE(request: Request) {
 
     await deleteChatById({ id });
 
+    return new Response('Chat deleted', { status: 200 });
+  } catch (error) {
+    console.error('Error deleting chat:', error);
+    return new Response('An error occurred while processing your request!', {
+      status: 500,
+    });
+  }
+  */
+
+  // NO-AUTH MODE: Allow anonymous deletion
+  try {
+    await deleteChatById({ id });
     return new Response('Chat deleted', { status: 200 });
   } catch (error) {
     console.error('Error deleting chat:', error);

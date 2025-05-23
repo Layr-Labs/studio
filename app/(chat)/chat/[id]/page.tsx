@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-import { auth } from '@/app/(auth)/auth';
+// COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+// import { auth } from '@/app/(auth)/auth';
 import { Chat } from '@/components/chat';
 import { getChatById, getMessagesByChatId } from '@/lib/db/queries';
 import { DataStreamHandler } from '@/components/data-stream-handler';
@@ -18,6 +19,8 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     notFound();
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   const session = await auth();
 
   if (chat.visibility === 'private') {
@@ -29,6 +32,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
       return notFound();
     }
   }
+  */
 
   const messagesFromDb = await getMessagesByChatId({
     id,
@@ -58,8 +62,8 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
           initialMessages={convertToUIMessages(messagesFromDb)}
           selectedChatModel={DEFAULT_CHAT_MODEL}
           selectedVisibilityType={chat.visibility}
-          isReadonly={session?.user?.id !== chat.userId}
-          user={session?.user}
+          isReadonly={false /* session?.user?.id !== chat.userId */}
+          user={undefined /* session?.user */}
         />
         <DataStreamHandler id={id} />
       </>
@@ -73,8 +77,8 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         initialMessages={convertToUIMessages(messagesFromDb)}
         selectedChatModel={chatModelFromCookie.value}
         selectedVisibilityType={chat.visibility}
-        isReadonly={session?.user?.id !== chat.userId}
-        user={session?.user}
+        isReadonly={false /* session?.user?.id !== chat.userId */}
+        user={undefined /* session?.user */}
       />
       <DataStreamHandler id={id} />
     </>

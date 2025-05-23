@@ -2,7 +2,8 @@ import { Toaster } from 'sonner';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
-import { AuthProvider } from '@/components/auth-provider';
+// COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+// import { AuthProvider } from '@/components/auth-provider';
 import { SessionDebug } from '@/components/session-debug';
 
 import './globals.css';
@@ -72,7 +73,8 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <AuthProvider>
+        {/* COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION */}
+        {/* <AuthProvider> */}
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -83,7 +85,7 @@ export default async function RootLayout({
             {children}
             {/* <SessionDebug /> */}
           </ThemeProvider>
-        </AuthProvider>
+        {/* </AuthProvider> */}
       </body>
     </html>
   );

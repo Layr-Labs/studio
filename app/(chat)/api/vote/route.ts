@@ -1,4 +1,5 @@
-import { auth } from '@/app/(auth)/auth';
+// COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+// import { auth } from '@/app/(auth)/auth';
 import { getChatById, getVotesByChatId, voteMessage } from '@/lib/db/queries';
 
 export async function GET(request: Request) {
@@ -9,6 +10,8 @@ export async function GET(request: Request) {
     return new Response('chatId is required', { status: 400 });
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   const session = await auth();
 
   if (!session || !session.user || !session.user.email) {
@@ -24,6 +27,7 @@ export async function GET(request: Request) {
   if (chat.userId !== session.user.id) {
     return new Response('Unauthorized', { status: 401 });
   }
+  */
 
   const votes = await getVotesByChatId({ id: chatId });
 
@@ -42,6 +46,8 @@ export async function PATCH(request: Request) {
     return new Response('messageId and type are required', { status: 400 });
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   const session = await auth();
 
   if (!session || !session.user || !session.user.email) {
@@ -57,6 +63,7 @@ export async function PATCH(request: Request) {
   if (chat.userId !== session.user.id) {
     return new Response('Unauthorized', { status: 401 });
   }
+  */
 
   await voteMessage({
     chatId,

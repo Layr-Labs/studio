@@ -1,4 +1,5 @@
-import { auth } from '@/app/(auth)/auth';
+// COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+// import { auth } from '@/app/(auth)/auth';
 import type { ArtifactKind } from '@/components/artifact';
 import {
   deleteDocumentsByIdAfterTimestamp,
@@ -14,11 +15,14 @@ export async function GET(request: Request) {
     return new Response('Missing id', { status: 400 });
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   const session = await auth();
 
   if (!session?.user?.id) {
     return new Response('Unauthorized', { status: 401 });
   }
+  */
 
   const documents = await getDocumentsById({ id });
 
@@ -28,9 +32,12 @@ export async function GET(request: Request) {
     return new Response('Not found', { status: 404 });
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   if (document.userId !== session.user.id) {
     return new Response('Forbidden', { status: 403 });
   }
+  */
 
   return Response.json(documents, { status: 200 });
 }
@@ -43,11 +50,14 @@ export async function POST(request: Request) {
     return new Response('Missing id', { status: 400 });
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   const session = await auth();
 
   if (!session?.user?.id) {
     return new Response('Unauthorized', { status: 401 });
   }
+  */
 
   const {
     content,
@@ -61,9 +71,12 @@ export async function POST(request: Request) {
   if (documents.length > 0) {
     const [document] = documents;
 
+    // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+    /*
     if (document.userId !== session.user.id) {
       return new Response('Forbidden', { status: 403 });
     }
+    */
   }
 
   const document = await saveDocument({
@@ -71,7 +84,7 @@ export async function POST(request: Request) {
     content,
     title,
     kind,
-    userId: session.user.id,
+    userId: 'anonymous-user', // session.user.id
   });
 
   return Response.json(document, { status: 200 });
@@ -90,6 +103,8 @@ export async function DELETE(request: Request) {
     return new Response('Missing timestamp', { status: 400 });
   }
 
+  // COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+  /*
   const session = await auth();
 
   if (!session?.user?.id) {
@@ -103,6 +118,7 @@ export async function DELETE(request: Request) {
   if (document.userId !== session.user.id) {
     return new Response('Unauthorized', { status: 401 });
   }
+  */
 
   const documentsDeleted = await deleteDocumentsByIdAfterTimestamp({
     id,
