@@ -1,21 +1,33 @@
 # EigenLayer Studio
 
-## Project Goals
+**Live App:** [studio.eigenlayer.xyz](https://studio.eigenlayer.xyz) 
+
+## Table of Contents
+- [Overview](#overview)
+- [Instructions](#instructions)
+- [Demo](#demo)
+- [Running Locally](#running-locally)
+- [Appendix](#appendix)
+
+
+
+
+## Overview
+
+EigenLayer Studio is an AI-powered tool that enables developers to go from idea to working AVS (Actively Validated Service) prototype in minutes. Whether you're experimenting or preparing for production, Studio accelerates AVS development using guided workflows and generative AI tooling.
+
+### Project Goals
 - "**Anyone** can build an [AVS on EigenLayer](https://docs.eigenlayer.xyz/developers/Concepts/avs-developer-guide) leveraging the power of AI first tooling"
 - "Idea to Design to AVS in under 10 minutes"
 
 
 
-## Demo Site
-**[studio.eigenlayer.xyz](https://studio.eigenlayer.xyz)**
-
-<img src="https://github.com/user-attachments/assets/de775676-9d0a-4ce3-a3ab-ee2c3357d1d5" alt="vibe-avs-animation_min" style="border: 3px solid #4F46E5; border-radius: 12px; max-width: 500%;"/>
 
 
 ## Instructions
-How to Use The App:
+**How to Use The App**
 - Choose whichever AI model you prefer for your testing from the dropdown.
-- Click one the suggested example actions or begin chatting free form with the app about your AVS idea.
+- Click one of the suggested example actions or begin chatting free form with the app about your AVS idea.
 - You will be guided through 3 stages: idea refinement, design tech spec generation, and prototype code generation.
     - Idea refinement: the app will provide a refined AVS idea, provide feedback on how well your idea fits as an AVS on EigenLayer, and suggest enhancements to get more value from your idea on EigenLayer.
     - Design generation: the app will generate a complete Design Tech Spec for your AVS idea.
@@ -24,7 +36,27 @@ How to Use The App:
 
 
 
+
+**Submitting Feedback**
+Any and all feedback are welcome! Please share your feedback via either:
+- Raising a new Issue [here](https://github.com/Layr-Labs/studio/issues). Tag the issue with either label "bug" or "enhancement".
+- Start a new conversation in our [Discussions](https://github.com/Layr-Labs/studio/discussions) page with any free form feedback you care to share.
+
+
+
+## Demo
+
+![App demo](https://github.com/user-attachments/assets/de775676-9d0a-4ce3-a3ab-ee2c3357d1d5)
+
+
 ## Running locally
+
+### Prerequisites
+- Node.js ≥ 18.x
+- [pnpm](https://pnpm.io/installation)
+- Vercel account
+
+# Instructions
 
 1. Install Vercel CLI: `npm i -g vercel`
 2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
