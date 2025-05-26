@@ -30,41 +30,55 @@ At the end of your response, ask the user if they would like to proceed with the
 export const stage3PrototypePromptDetailedCodeGeneration = `
 # ** BEGIN INSTRUCTIONS FOR LLM **
 
-Your Primary task:  your job is to generate the entire modified hello-world-avs codebase in Typescript based on the supplied task list.
+Your Primary task: Generate the entire modified hello-world-avs codebase in TypeScript based on the supplied task list.
 
 Ask the user for clarification if the task list is ambiguous or incomplete, rather than guessing.
 
-Recreate all the files in the existing hello-world-avs codebase shown below and also generate the modifications or new files needed to implement the user's supplied design or task list.
+Recreate all files in the existing hello-world-avs codebase shown below and generate the modifications or new files needed to implement the user's supplied design or task list.
 
-Each file must have a "path", "summary", and "content" field.
+## CRITICAL JSON FORMAT REQUIREMENTS:
 
-Each generated code file must be included as a child element inside a JSON array similar to the following example:
+1. RESPONSE FORMAT: You MUST respond with ONLY a valid JSON array. No markdown code blocks, no explanations, no other text.
+
+2. JSON STRUCTURE: Each file must be an object with exactly these three string fields:
+   - "path": relative file path from hello-world-avs root
+   - "summary": brief description of the file's purpose
+   - "content": complete file contents as a string
+
+3. EXAMPLE FORMAT (follow this exact structure):
 [
-    {
-        "path": "..",
-        "summary": "..",
-        "content": ".."
-    },
-    {
-        "path": "..",
-        "summary": "..",
-        "content": ".."
-    },
-    {
-        "path": "..",
-        "summary": "..",
-        "content": ".."
-    }
+  {
+    "path": "contracts/HelloWorldServiceManager.sol",
+    "summary": "Main service manager contract",
+    "content": "// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ncontract HelloWorldServiceManager {\\n  // contract code here\\n}"
+  },
+  {
+    "path": "operator/index.ts",
+    "summary": "Operator main logic",
+    "content": "import { ethers } from 'ethers';\\n\\n// operator code here"
+  }
 ]
 
-"Path" should be relative to the root of the hello-world-avs codebase.
-The output must be a single JSON array, not multiple arrays or objects.
+4. JSON VALIDATION RULES:
+   - Use double quotes for all strings
+   - Escape special characters in content (\\n for newlines, \\" for quotes, \\\\ for backslashes)
+   - NO trailing commas anywhere
+   - NO comments inside JSON
+   - Ensure valid JSON syntax that passes JSON.parse()
 
-Remove any trailing commas after the last property in each object or array in your JSON file.
+5. CONTENT ESCAPING:
+   - Newlines: Use \\n
+   - Double quotes: Use \\"
+   - Backslashes: Use \\\\
+   - Tabs: Use \\t
 
-Check to ensure the JSON is valid and properly formatted.
-Only respond with the JSON objects, no other text or comments.
-No extra text, explanations, or markdown should be included—just the raw JSON array.
+6. FORBIDDEN ELEMENTS:
+   - NO markdown code blocks (\`\`\`)
+   - NO explanatory text before or after JSON
+   - NO comments or notes
+   - NO multiple JSON objects/arrays
+
+Your response must start with [ and end with ] and contain nothing else.
 
 **END OF INSTRUCTIONS FOR LLM**
 `;
