@@ -60,7 +60,8 @@ function getModelProvider(selectedChatModel?: string) {
     case 'claude':
       return new ChatAnthropic({
         streaming: true,
-        model: "claude-3-7-sonnet-latest",
+        // model: "claude-3-7-sonnet-latest",
+        model: "claude-sonnet-4-20250514",
       });
     case 'chatgpt':
       return new ChatOpenAI({
