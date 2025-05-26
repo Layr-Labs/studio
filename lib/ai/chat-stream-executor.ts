@@ -162,9 +162,9 @@ export async function generateStreamingLLMResponse(
         
           // const codeProjectJSON = tempCodeProjectJSON;
         console.log('chat-stream-executor: invoking model to generate code project json');
-        console.time('chat-stream-executor: code project json generation');
+        
         const codeProjectChunk = await selectedModelProvider.invoke(messageHistory);
-        console.timeEnd('chat-stream-executor: code project json generation');
+        
         console.log('chat-stream-executor: code project json chunk generated');
         
         let codeProjectJSONString = codeProjectChunk.content?.toString() ?? ''; 
