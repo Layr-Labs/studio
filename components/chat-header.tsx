@@ -54,12 +54,12 @@ function PureChatHeader({
             <TooltipContent>New Chat</TooltipContent>
           </Tooltip>
         )}
-        {!isReadonly && (
+        {/* {!isReadonly && (
           <ModelSelector
             selectedModelId={selectedModelId}
             className="order-5 md:order-4"
           />
-        )}
+        )} */}
       </div>
 
       {/* Left-aligned items (moved to the right) */}

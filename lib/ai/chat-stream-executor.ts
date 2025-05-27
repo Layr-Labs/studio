@@ -2,10 +2,8 @@ import type { UIMessage } from 'ai';
 import type { Session } from 'next-auth';
 
 // External libraries
-import { ChatAnthropic } from "@langchain/anthropic";
 import { AIMessage, AIMessageChunk, HumanMessage, SystemMessage } from '@langchain/core/messages';
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { ChatOpenAI } from "@langchain/openai";
+
 
 // Internal absolute imports
 import { logContentForDebug, logStreamForDebug } from '@/lib/utils/debugUtils';
@@ -17,6 +15,7 @@ import { basicPrompt, stage1IdeasPrompt, stage2DesignPrompt, stage3PrototypeProm
 import { appendJSONToHelloWorld as prependHelloWorldToJSON, generateZipFromJSONString, validateCodeProjectJSON, appendJSONToHelloWorld } from '../code/generate-code-project';
 import type { CodeFile } from '../code/generate-code-project';
 import { EIGEN_LAYER_AVS_FORM_URL } from '@/lib/constants';
+import { modelFullStreaming } from './providers';
 
 
 interface ExecuteChatStreamParams {
@@ -47,63 +46,6 @@ function convertUIMessagesToLangChainMessages(messages: UIMessage[]) {
   }).filter((message): message is HumanMessage | AIMessage => message !== null); // Type guard to remove null values
 }
 
-
-// Get the appropriate LLM model based on selected chat model
-function getModelProvider(selectedChatModel?: string) {
-  console.log('chat-stream-executor: Using model:', selectedChatModel);
-  
-  if (!selectedChatModel) {
-    selectedChatModel = 'gemini';
-  }
-
-  switch(selectedChatModel) {
-    case 'claude':
-      return new ChatAnthropic({
-        streaming: true,
-        model: "claude-3-7-sonnet-latest",
-      });
-    case 'chatgpt':
-      return new ChatOpenAI({
-        streaming: true,
-        model: "gpt-4o-mini",
-      });
-    case 'gemini':
-      return new ChatGoogleGenerativeAI({
-        streaming: true,
-        model: "gemini-2.5-pro-preview-03-25",
-      });
-    default:
-      console.log('Unknown model, defaulting to ChatGPT');
-      return new ChatOpenAI({
-        streaming: true,
-        model: "gpt-4o-mini",
-      });
-  }
-}
-
-function concatStreams<T>(stream1: ReadableStream<T>, stream2: ReadableStream<T>): ReadableStream<T> {
-  return new ReadableStream<T>({
-    async start(controller) {
-      // Helper to pipe a stream into the controller
-      async function pipeStream(stream: ReadableStream<T>) {
-        const reader = stream.getReader();
-        try {
-          while (true) {
-            const { value, done } = await reader.read();
-            if (done) break;
-            controller.enqueue(value);
-          }
-        } finally {
-          reader.releaseLock();
-        }
-      }
-      // Pipe first stream, then second stream
-      await pipeStream(stream1);
-      await pipeStream(stream2);
-      controller.close();
-    }
-  });
-}
 
 export async function generateStreamingLLMResponse(
   messages: UIMessage[], 
@@ -145,8 +87,7 @@ export async function generateStreamingLLMResponse(
     ...convertUIMessagesToLangChainMessages(messages)
   ];
 
-  // Get the current model to use
-  const selectedModelProvider = getModelProvider(selectedChatModel);
+
 
   try {
     
@@ -163,7 +104,7 @@ export async function generateStreamingLLMResponse(
           // const codeProjectJSON = tempCodeProjectJSON;
         console.log('chat-stream-executor: invoking model to generate code project json');
         console.time('chat-stream-executor: code project json generation');
-        const codeProjectChunk = await selectedModelProvider.invoke(messageHistory);
+        const codeProjectChunk = await modelFullStreaming.invoke(messageHistory);
         console.timeEnd('chat-stream-executor: code project json generation');
         console.log('chat-stream-executor: code project json chunk generated');
         
@@ -207,7 +148,7 @@ export async function generateStreamingLLMResponse(
         }
       });
     } else {
-      llmResponseStream = await selectedModelProvider.stream(messageHistory);
+      llmResponseStream = await modelFullStreaming.stream(messageHistory);
     }
 
     // Todo: filter out backticks here?
