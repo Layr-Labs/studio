@@ -1,3 +1,5 @@
+// COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION
+/*
 import { auth } from '@/app/(auth)/auth';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
@@ -33,13 +35,48 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all paths except for:
-     * 1. /api/auth routes
-     * 2. /_next (Next.js internals)
-     * 3. /_static (Static files)
-     * 4. /favicon.ico, /robots.txt, etc.
-     */
+    // Match all paths except for:
+    // 1. /api/auth routes
+    // 2. /_next (Next.js internals)  
+    // 3. /_static (Static files)
+    // 4. /favicon.ico, /robots.txt, etc.
     '/((?!_next|_static|favicon.ico|robots.txt).*)',
   ],
 };
+*/
+
+// NO-AUTH MODE: Allow all requests through without authentication
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+const RATE_LIMIT = 60; // requests
+const INTERVAL = 60 * 1000; // 1 minute
+
+// In-memory map for IP tracking (note: not suitable for production scale)
+const ipMap = new Map<string, { count: number; last: number }>();
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  // Only apply rate limiting to /api/chat endpoints
+  if (pathname.startsWith('/api/chat')) {
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+    const now = Date.now();
+    const entry = ipMap.get(ip) || { count: 0, last: now };
+
+    // Reset count if interval has passed
+    if (now - entry.last > INTERVAL) {
+      entry.count = 0;
+      entry.last = now;
+    }
+
+    entry.count += 1;
+    ipMap.set(ip, entry);
+
+    if (entry.count > RATE_LIMIT) {
+      const res = NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+      res.headers.set('Retry-After', '60');
+      return res;
+    }
+  }
+  return NextResponse.next();
+}

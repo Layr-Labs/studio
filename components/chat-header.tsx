@@ -99,11 +99,12 @@ function PureChatHeader({
           </TooltipTrigger>
           <TooltipContent>Contact EigenLayer</TooltipContent>
         </Tooltip>
-        {user && (
+        {/* COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION */}
+        {/* {user && (
           <div className="order-5 md:order-5 mr-2">
             <SidebarUserNav user={user} />
           </div>
-        )}
+        )} */}
       </div>
       {/* 
       // Commenting out until we want to add this functionality in the future: private/public visibility
