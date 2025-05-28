@@ -18,6 +18,7 @@ export const modelFullStreaming = new ChatOpenAI({
   streaming: true,
   model: OPENAI_MODEL_FULL_STREAMING,
   cache: true,
+  modelKwargs: { max_tokens: 16000 }
 });
 
 // Fast, inexpensive, non-streaming model.

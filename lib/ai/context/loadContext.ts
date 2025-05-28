@@ -1,7 +1,7 @@
 // URL constants for fetching context data
 const EIGENLAYER_DOCS_OVERVIEW_URL = 'https://af52o4jcdfzphbst.public.blob.vercel-storage.com/context/repomix-output-eigenlayer-docs-overview-min-wtABuLj3MuRM9JklyGY2tt8v6gPJNY.md';
 const EIGENLAYER_MIDDLEWARE_DOCS_URL = 'https://af52o4jcdfzphbst.public.blob.vercel-storage.com/context/repomix-output-eigenlayer-middleware-docs-Hz9TpntXTCiddC0ilxAJq2ztglt8DI.md';
-const HELLO_WORLD_AVS_CODE_MIN_URL = 'https://af52o4jcdfzphbst.public.blob.vercel-storage.com/context/repomix-output-Layr-Labs-hello-world-avs-minified-GA9JC545l89gNAYte8iDADNteNBqXj.txt';
+const HELLO_WORLD_AVS_CODE_MIN_URL = 'https://af52o4jcdfzphbst.public.blob.vercel-storage.com/context/repomix-output-Layr-Labs-hello-world-avs-minified-v2-BC6G9vbpevl5FyP5LW07sMMEEeqY4J.txt';
 const HELLO_WORLD_AVS_CODE_MIN_JSON_URL = 'https://af52o4jcdfzphbst.public.blob.vercel-storage.com/context/hello-world-avs-json-dtPpmbxgQIDvlw8yxAJDuLQsI0B81E.txt';
 
 // Cache variables to store fetched data
