@@ -129,7 +129,7 @@ export async function generateStreamingLLMResponse(
 
       } catch (err) {
         console.log('chat-stream-executor: error generating code project json', err);
-        responseText = "Unable to generate downloadable project code due to AI response processing error.\n\nPlease raise an issue in the github repo for this project and we'll fix it as soon as possible.";
+        responseText = "Unable to generate downloadable project code due to AI response processing error.\n\nPlease raise an issue in the github repo for this project and include a screenshot of your prompt.";
       }
       
       llmResponseStream = new ReadableStream({

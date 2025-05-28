@@ -91,7 +91,7 @@ export async function stage3PrototypePromptTaskList(): Promise<string> {
 export async function stage4DetailedCodeGenerationPrompt(): Promise<string> {
   try {
     console.log('prompts: generating stage 4 code prompt');
-    const eigenLayerDocsMiddleware = await fetchEigenLayerDocsMiddleware();
+    // const eigenLayerDocsMiddleware = await fetchEigenLayerDocsMiddleware();
     const helloWorldAVSCodeMin = await fetchHelloWorldAVSCodeMin();
 
     // Create the full prompt with fetched data
@@ -100,8 +100,8 @@ export async function stage4DetailedCodeGenerationPrompt(): Promise<string> {
       + helloWorldAVSCodeMin 
       + '# And you can use the following EigenLayer documentation for additional context:'
       + eigenBasicsDoc
-      + '# And you can use the following EigenLayer middleware overview for additional context:'
-      + eigenLayerDocsMiddleware;
+      // + '# And you can use the following EigenLayer middleware overview for additional context:'
+      // + eigenLayerDocsMiddleware;
 
     return fullPrompt;
   } catch (error) {
