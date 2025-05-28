@@ -3,24 +3,22 @@ Give me feedback on my AVS idea. My idea is to build a decentralized ETH token p
 `;
 
 export const STAGE2_TEST_PROMPT1 = `
-Help me generate a design tech spec for a decentralized ETH token price oracle using multiple price feeds (Coinmarketcap, Coingecko, DEX data, etc.).
+Help me generate a design tech spec for an EigenLayer AVS that is a decentralized ETH token price oracle using multiple price feeds (Coinmarketcap, Coingecko, DEX data, etc.).
 `;
 
 export const STAGE3_TEST_PROMPT1 = `
-Help me generate a prototype for an ETH token price oracle AVS using Coinmarketcap.
+Help me generate a task list to build an EigenLayer AVS. My idea is to build a decentralized ETH token price oracle using multiple price feeds (Coinmarketcap, Coingecko, DEX data, etc.).
 `;
 
 
 export const STAGE3_TEST_PROMPT2 = `
 Help me generate code based on the following task list.
-# Required Changes for ETH token price oracle AVS
-* Modify the ServiceManager contract to add a new task type for ETH token price oracle
-* Create new functionality in HelloWorldServiceManager to handle ETH token price oracle tasks
-* Add storage for ETH token price oracle results and metadata
-* Implement the operator code to connect with an Coinmarketcap API for ETH token price oracle
-* Modify the respondToTask function to handle ETH token price oracle task responses
-* Update the README.md to explain the ETH token price oracle AVS
-
+- Modify the operator code to include methods for fetching and updating the token price data based on the task responses. Integrate APIs or data fetching mechanisms for Coinmarketcap, Coingecko, and DEXs within the new price oracle service. Implement a method to aggregate price data from the different sources to ensure accuracy and reduce the influence of outliers.
+- Modify the HelloWorldServiceManager.sol contract to create a decentralized price oracle service with functions to fetch and store multiple pricing data from various sources.
+- Define tasks in the IHelloWorldServiceManager.sol interface to allow for price feed requests and updates.
+- Set up events in HelloWorldServiceManager.sol to emit price updates and aggregated data for monitoring and transparency.
+- Update the ServiceManager contract to allow Operators to sign off on the price updates based on their respective price feeds.
+- Update the README.md file to include the overview of the price oracle service and examples of usage with the new methods.
 `;
 
 

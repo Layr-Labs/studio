@@ -23,9 +23,9 @@ export async function logContentForDebug(
       const logFilePath = path.join(debugDir, timestampedFilename);
       await fs.mkdir(debugDir, { recursive: true }); // Ensure directory exists
       await fs.writeFile(logFilePath, content, 'utf8');
-      //console.log(`[DEV ONLY - ${callerInfo}] Content logged to: ${logFilePath}`);
+      //console.log(`${callerInfo} Content logged to: ${logFilePath}`);
     } catch (logError) {
-      console.error(`[DEV ONLY - ${callerInfo}] Failed to write debug log to ${filename}:`, logError);
+      console.error(`${callerInfo} Failed to write debug log to ${filename}:`, logError);
     }
   }
 }
@@ -65,7 +65,7 @@ export async function logStreamForDebug<T>(
   try {
     await fs.mkdir(debugDir, { recursive: true });
   } catch (err) {
-    console.error(`[DEV ONLY - ${callerInfo}] Failed to create debug directory:`, err);
+    console.error(`${callerInfo} Failed to create debug directory:`, err);
     return; // Exit if we can't create the directory
   }
 
@@ -102,13 +102,13 @@ export async function logStreamForDebug<T>(
           
           await fs.appendFile(logFilePath, chunkStr + '\n', 'utf8');
         } catch (logErr) {
-          console.error(`[DEV ONLY - ${callerInfo}] Failed to write chunk to ${filename}:`, logErr);
+          console.error(`${callerInfo} Failed to write chunk to ${filename}:`, logErr);
         }
       }
       
-      console.log(`[DEV ONLY - ${callerInfo}] Stream logging completed to: ${logFilePath}`);
+      console.log(`${callerInfo} Stream logging completed to: ${logFilePath}`);
     } catch (streamErr) {
-      console.error(`[DEV ONLY - ${callerInfo}] Error processing stream:`, streamErr);
+      console.error(`${callerInfo} Error processing stream:`, streamErr);
     }
   })();
 }

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { memo } from 'react';
 import type { UseChatHelpers } from '@ai-sdk/react';
-import { STAGE1_TEST_PROMPT1, STAGE2_TEST_PROMPT1, STAGE3_TEST_PROMPT1, STAGE3_TEST_PROMPT2 } from '@/tests/prompts/avs';
+import { STAGE1_TEST_PROMPT1, STAGE2_TEST_PROMPT1, STAGE3_TEST_PROMPT1, STAGE3_TEST_PROMPT2 } from '@/tests/prompts/avs-test-prompts';
 import { UserIntent } from '@/lib/ai/types';
 
 interface SuggestedActionsProps {

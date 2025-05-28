@@ -17,7 +17,7 @@ import { generateTitleFromUserMessage } from '../../actions';
 import { classifyUserIntent } from '@/lib/ai/intentManager';
 import { UserIntent } from '@/lib/ai/types';
 import { generateStreamingLLMResponse } from '@/lib/ai/chat-stream-executor';
-import { generateBatchLLMResponse } from '@/lib/ai/chat-batch-executor';
+
 
 
 
@@ -83,8 +83,6 @@ export async function POST(request: Request) {
 
 
     
-    // const response = await generateBatchLLMResponse(messages, selectedChatModel, initialIntent);
-    // return response;
 
 
     // Note: primary stream LLM backend invocation starts here.
