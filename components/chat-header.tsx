@@ -11,8 +11,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import type { VisibilityType } from './visibility-selector';
 import { ModelSelector } from './model-selector';
 import { SidebarUserNav } from '@/components/sidebar-user-nav';
+import { HelpCircle } from 'lucide-react';
 import type { User } from 'next-auth';
 import { EIGEN_LAYER_AVS_FORM_URL } from '@/lib/constants';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 function PureChatHeader({
   chatId,
@@ -66,21 +68,34 @@ function PureChatHeader({
       <div className="flex items-center gap-2">
        
         {/* <SidebarToggle /> */}
-        <Tooltip>
-          <TooltipTrigger asChild>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
               className="order-3 md:order-2 p-2"
-              onClick={() => window.open('https://github.com/Layr-Labs/studio?tab=readme-ov-file#instructions', '_blank')}
               aria-label="Help / Documentation"
             >
-              <InfoIcon size={20} />
+              <HelpCircle size={20} />
             </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            How To Guide
-          </TooltipContent>
-        </Tooltip>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            <DropdownMenuItem onSelect={() => window.open('https://github.com/Layr-Labs/studio?tab=readme-ov-file#instructions', '_blank')}>
+              How To Guide
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => window.open('https://github.com/Layr-Labs/studio?tab=readme-ov-file#feedback', '_blank')}>
+              Feedback
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/privacy-policy', '_blank')}>
+              Privacy Policy
+            </DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/terms-of-service', '_blank')}>
+              EigenLayer Terms of Service
+            </DropdownMenuItem>
+            {/* <DropdownMenuItem onSelect={() => window.open('https://todo', '_blank')}>
+              EigenLayer Studio Terms of Use
+            </DropdownMenuItem> */}
+          </DropdownMenuContent>
+        </DropdownMenu>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button

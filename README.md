@@ -35,7 +35,7 @@ EigenLayer Studio is an AI-powered tool that enables developers to go from idea 
 - Feel free to click one of the suggested actions to test its operation or skip through the three stages as you like.
 
 
-
+## Feedback
 
 **Submitting Feedback**
 Any and all feedback are welcome! Please share your feedback via either:
