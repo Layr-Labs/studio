@@ -1,6 +1,6 @@
 
 
-export const stage3PrototypeTaskList = `
+export const stage3TaskListPromptText = `
 # ** BEGIN INSTRUCTIONS FOR LLM **
 
 

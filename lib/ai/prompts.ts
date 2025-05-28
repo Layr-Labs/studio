@@ -1,15 +1,17 @@
 import type { ArtifactKind } from '@/components/artifact';
 import { eigenBasicsDoc } from './context/eigenBasics';
-import { stage3PrototypeTaskList } from './prompts/stage3-task-list-generation';
+import { stage3TaskListPromptText } from './prompts/stage3-task-list-generation';
 import { fetchEigenLayerDocsMiddleware, fetchHelloWorldAVSCodeMin, fetchEigenLayerDocsOverview } from './context/loadContext';
 import { stage1IdeaRefinementPromptLLMGuidance } from './prompts/stage1-idea-refinement';
 import { stage2DesignGenerationPromptText } from './prompts/stage2-design-generation';
+import { stage4CodeGenerationPromptText } from './prompts/stage4-code-generation';
 
 
 export const stageProgessionPrompt =  `Help the user with each stage of their AVS development journey. Encourage them to move to the next stage when they are ready.
 - Stage 1: Refine their AVS idea
 - Stage 2: Generate their AVS Design Tech Spec
-- Stage 3: Generate their AVS Prototype code
+- Stage 3: Generate their AVS Task List
+- Stage 4: Generate their AVS Prototype code
 `;
 
 export const basicPrompt =
@@ -62,14 +64,14 @@ export async function stage2DesignPrompt(): Promise<string> {
 
 
 // Custom prompt for Stage 3: AVS code generation - Now fetches on demand
-export async function stage3PrototypePromptTaskList(): Promise<string> {
+export async function stage3TaskListPrompt(): Promise<string> {
   try {
     console.log('prompts: generating stage 3 task list prompt');
     //const eigenLayerDocsMiddleware = await fetchEigenLayerDocsMiddleware();
     const helloWorldAVSCodeMin = await fetchHelloWorldAVSCodeMin();
 
     // Create the full prompt with fetched data
-    const fullPrompt = stage3PrototypeTaskList
+    const fullPrompt = stage3TaskListPromptText
       + '# And you can use the following Hello World AVS code for additional context:'
       + helloWorldAVSCodeMin 
       + '# And you can use the following EigenLayer documentation for additional context:'
@@ -81,21 +83,21 @@ export async function stage3PrototypePromptTaskList(): Promise<string> {
   } catch (error) {
     console.error("Error constructing stage 3 task list:", error);
     // Fallback to the basic prompt if fetching fails
-    return stage3PrototypeTaskList + '\n# And you can use the following EigenLayer documentation for additional context:\n' + eigenBasicsDoc;
+    return stage3TaskListPromptText + '\n# And you can use the following EigenLayer documentation for additional context:\n' + eigenBasicsDoc;
   }
 }
 
 
 
 // Custom prompt for Stage 4: AVS code generation - Now fetches on demand
-export async function stage4DetailedCodeGenerationPrompt(): Promise<string> {
+export async function stage4CodeGenerationPrompt(): Promise<string> {
   try {
     console.log('prompts: generating stage 4 code prompt');
     // const eigenLayerDocsMiddleware = await fetchEigenLayerDocsMiddleware();
     const helloWorldAVSCodeMin = await fetchHelloWorldAVSCodeMin();
 
     // Create the full prompt with fetched data
-    const fullPrompt = stage4DetailedCodeGenerationPrompt
+    const fullPrompt = stage4CodeGenerationPromptText
       + '# And you can use the following Hello World AVS code for additional context:'
       + helloWorldAVSCodeMin 
       + '# And you can use the following EigenLayer documentation for additional context:'
@@ -107,7 +109,7 @@ export async function stage4DetailedCodeGenerationPrompt(): Promise<string> {
   } catch (error) {
     console.error("Error constructing stage 4 code prompt:", error);
     // Fallback to the basic prompt if fetching fails
-    return stage4DetailedCodeGenerationPrompt + '\n# And you can use the following EigenLayer documentation for additional context:\n' + eigenBasicsDoc;
+    return stage4CodeGenerationPromptText + '\n# And you can use the following EigenLayer documentation for additional context:\n' + eigenBasicsDoc;
   }
 }
 

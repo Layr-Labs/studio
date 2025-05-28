@@ -1,6 +1,6 @@
 
 
-export const stage4DetailedCodeGenerationPrompt = `
+export const stage4CodeGenerationPromptText = `
 # ** BEGIN INSTRUCTIONS FOR LLM **
 
 Your Primary task:  your job is to generate the modified source codefiles for the hello-world-avs codebase in Typescript based on the idea, design, or task list.

@@ -11,7 +11,7 @@ import { logContentForDebug, logStreamForDebug } from '@/lib/utils/debugUtils';
 // Internal relative imports
 import { classifyUserIntent } from './intentManager';
 import { UserIntent } from './types';
-import { basicPrompt, stage1IdeasPrompt, stage2DesignPrompt, stage3PrototypePromptTaskList, stageProgessionPrompt, stage4DetailedCodeGenerationPrompt } from './prompts';
+import { basicPrompt, stage1IdeasPrompt, stage2DesignPrompt, stage3TaskListPrompt, stageProgessionPrompt, stage4CodeGenerationPrompt } from './prompts';
 import { generateZipFromJSONString, validateCodeProjectJSON, appendJSONToHelloWorld } from '../code/generate-code-project';
 import type { CodeFile } from '../code/generate-code-project';
 import { EIGEN_LAYER_AVS_FORM_URL } from '@/lib/constants';
@@ -71,9 +71,9 @@ export async function generateStreamingLLMResponse(
   } else if (intent === UserIntent.GenerateDesign) {
     systemPrompt = await stage2DesignPrompt();
   } else if (intent === UserIntent.GenerateTaskList) {
-    systemPrompt = await stage3PrototypePromptTaskList();
+    systemPrompt = await stage3TaskListPrompt();
   } else if (intent === UserIntent.GenerateCode) {
-    systemPrompt = await stage4DetailedCodeGenerationPrompt();
+    systemPrompt = await stage4CodeGenerationPrompt();
   } // else, keep the basicPrompt
 
   // Add the stage progression prompt to the system prompt
