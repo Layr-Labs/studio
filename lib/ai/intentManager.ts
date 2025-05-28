@@ -26,15 +26,18 @@ export async function classifyUserIntent(messages: UIMessage[]): Promise<UserInt
     Given the user's recent messages, determine:
     1) Refine idea
     2) Generate design
-    3) Build prototype (start with task list if not yet generated)
-    4) Generate code (if task list created)
+    3) Generate task list
+    4) Generate code
     5) Other
     Classify the intent based on the conversation.
+
+    If the user's response to the question "Would you like to proceed with the code generation for these tasks?" is "Yes", then classify the intent as "Generate code".
   `;
 
   // Only use the last few messages for intent classification to improve efficiency
-  const recentMessages = messages.slice(-3);
-  const userText = recentMessages.map(m => m.content).join("\n");
+  // const recentMessages = messages.slice(-5);
+  // const userText = recentMessages.map(m => m.content).join("\n");
+  const userText = messages.map(m => m.content).join("\n");;
 
   try {
     const result = await structuredModel.invoke([
