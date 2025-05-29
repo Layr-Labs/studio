@@ -60,8 +60,12 @@ Any and all feedback are welcome! Please share your feedback via either:
 
 1. Install Vercel CLI: `npm i -g vercel`
 2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
-3. Download your environment variables: `vercel env pull`
-
+3. Set local environment variables
+``` bash
+cp .env.example  .env.local
+#fill in each variable with your personal environment keys as needed
+```
+4. Install node dependencies and run the application
 ```bash
 rm -rf node_modules
 rm -rf .next/
