@@ -12,9 +12,9 @@ export const Greeting = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
         transition={{ delay: 0.5 }}
-        className="text-3xl font-semibold"
+        className="text-4xl"
       >
-        What would you like to verify?
+        What would you like to <span className="font-semibold text-[#1A0C6D]">verify</span>?
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
