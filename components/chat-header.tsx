@@ -45,7 +45,9 @@ function PureChatHeader({
             className="order-5 md:order-4"
           />
         )} */}
-         <span className="text-s text-muted-foreground font-medium">EigenLayer Studio (Beta)</span>
+         <span className="text-l text-muted-foreground font-large">EigenLayer Studio</span>
+         <span className="text-xs text-muted-foreground font-small">(Beta)</span>
+         
       </div>
 
       {/* Centered title */}
