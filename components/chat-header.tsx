@@ -14,8 +14,9 @@ import { SidebarUserNav } from '@/components/sidebar-user-nav';
 import { HelpCircle, Menu, SquareMenu } from 'lucide-react';
 import type { User } from 'next-auth';
 import { EIGEN_LAYER_AVS_FORM_URL } from '@/lib/constants';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent } from '@/components/ui/dropdown-menu';
 import { Github } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 function PureChatHeader({
   chatId,
@@ -34,6 +35,7 @@ function PureChatHeader({
   const { open } = useSidebar();
 
   const { width: windowWidth } = useWindowSize();
+  const { setTheme, theme } = useTheme();
 
   return (
     <header className="flex sticky top-0 bg-background py-1.5 items-center px-[20px] md:px-[20px] gap-2 justify-between">
@@ -126,16 +128,34 @@ function PureChatHeader({
             <DropdownMenuItem onSelect={() => window.open('https://github.com/Layr-Labs/studio?tab=readme-ov-file#feedback', '_blank')}>
               Feedback
             </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => window.open('/studio-terms', '_blank')}>
-              EigenLayer Studio Terms of Use
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/privacy-policy', '_blank')}>
-              EigenLayer Privacy Policy
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/terms-of-service', '_blank')}>
-              EigenLayer Terms of Service
-            </DropdownMenuItem>
-            
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>Legal</DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem onSelect={() => window.open('/studio-terms', '_blank')}>
+                  EigenLayer Studio Terms of Use
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/privacy-policy', '_blank')}>
+                  EigenLayer Privacy Policy
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/terms-of-service', '_blank')}>
+                  EigenLayer Terms of Service
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>Theme</DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem onSelect={() => setTheme('dark')}>
+                  Dark
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => setTheme('light')}>
+                  Light
+                </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => setTheme('system')}>
+                  Auto
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
           </DropdownMenuContent>
         </DropdownMenu>
         {/* COMMENTED OUT FOR NON-AUTH MODE - RESTORE FOR AUTHENTICATION */}
