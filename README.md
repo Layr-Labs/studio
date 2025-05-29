@@ -46,7 +46,16 @@ Any and all feedback are welcome! Please share your feedback via either:
 
 ## Demo
 
-![App demo](https://github.com/user-attachments/assets/de775676-9d0a-4ce3-a3ab-ee2c3357d1d5)
+
+
+
+https://github.com/user-attachments/assets/c5a2e2f4-24ff-4b03-aec7-250ab46fa63c
+
+
+
+
+
+
 
 
 ## Running locally
