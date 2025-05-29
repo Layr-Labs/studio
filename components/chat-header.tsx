@@ -64,6 +64,11 @@ function PureChatHeader({
         )} */}
       </div>
 
+      {/* Centered title */}
+      <div className="flex-1 flex justify-center">
+        <span className="text-s text-muted-foreground font-medium">EigenLayer Studio (Beta)</span>
+      </div>
+
       {/* Left-aligned items (moved to the right) */}
       <div className="flex items-center gap-2">
        
