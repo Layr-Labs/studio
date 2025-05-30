@@ -14,6 +14,7 @@ import {
 } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import crypto from 'crypto';
 
 import {
   user,
@@ -432,4 +433,28 @@ export async function updateChatVisiblityById({
     console.error('Failed to update chat visibility in database');
     throw error;
   }
+}
+
+// LLM Cache functions
+export function hashPrompt(prompt: string): string {
+  return crypto.createHash('sha256').update(prompt).digest('hex');
+}
+
+export async function getCachedLLMResponse(prompt: string): Promise<string | null> {
+  const promptHash = hashPrompt(prompt);
+  // Use the existing client for querying
+  const res = await client`
+    SELECT response FROM llm_cache WHERE prompt_hash = ${promptHash}
+  `;
+  return res[0]?.response ?? null;
+}
+
+export async function setCachedLLMResponse(prompt: string, response: string): Promise<void> {
+  const promptHash = hashPrompt(prompt);
+  // Use the existing client for inserting
+  await client`
+    INSERT INTO llm_cache (prompt_hash, prompt, response)
+    VALUES (${promptHash}, ${prompt}, ${response})
+    ON CONFLICT (prompt_hash) DO NOTHING
+  `;
 }
