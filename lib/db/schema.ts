@@ -150,3 +150,13 @@ export const suggestion = pgTable(
 );
 
 export type Suggestion = InferSelectModel<typeof suggestion>;
+
+export const llmCache = pgTable('llm_cache', {
+  id: varchar('id').primaryKey().notNull(), // SERIAL in SQL, but Drizzle uses string for PKs
+  promptHash: varchar('prompt_hash', { length: 64 }).notNull().unique(),
+  prompt: text('prompt').notNull(),
+  response: text('response').notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export type LLMCache = InferSelectModel<typeof llmCache>;

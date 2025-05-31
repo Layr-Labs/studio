@@ -17,6 +17,7 @@ import type { CodeFile } from '../code/generate-code-project';
 import { EIGEN_LAYER_AVS_FORM_URL } from '@/lib/constants';
 import { modelFullStreaming } from './providers';
 import { getCachedLLMResponse, setCachedLLMResponse } from '../db/queries';
+import { getMostRecentUserMessage } from '../utils';
 
 
 interface ExecuteChatStreamParams {
@@ -88,8 +89,9 @@ export async function generateStreamingLLMResponse(
     ...convertUIMessagesToLangChainMessages(messages)
   ];
 
+  const userMessage = getMostRecentUserMessage(messages);
   // Serialize messageHistory for caching
-  const promptString = JSON.stringify(messageHistory);
+  const promptString = JSON.stringify(userMessage?.content);
 
   try {
     // Get the raw stream from the model
@@ -99,8 +101,10 @@ export async function generateStreamingLLMResponse(
       // Try cache first
       const cachedResponse = await getCachedLLMResponse(promptString);
       if (cachedResponse) {
+        console.log('chat-stream-executor: cached response found');
         responseText = cachedResponse;
       } else {
+        console.log('chat-stream-executor: No cached response found');
         try {
           console.log('chat-stream-executor: invoking model to generate code project json');
           const codeProjectChunk = await modelFullStreaming.invoke(messageHistory);

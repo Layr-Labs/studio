@@ -450,6 +450,7 @@ export async function getCachedLLMResponse(prompt: string): Promise<string | nul
 }
 
 export async function setCachedLLMResponse(prompt: string, response: string): Promise<void> {
+  console.log('setCachedLLMResponse: setting cached response for prompt', prompt);
   const promptHash = hashPrompt(prompt);
   // Use the existing client for inserting
   await client`
