@@ -124,7 +124,12 @@ export async function generateStreamingLLMResponse(
             + '\n\n Your project code is a modification of the [hello-world-avs](https://github.com/Layr-Labs/hello-world-avs) project code.'
             + '\n\nWant to discuss your AVS idea with a member of the EigenLayer team? Fill out [this form](' + EIGEN_LAYER_AVS_FORM_URL + ") and we'll be in touch soon.";
           // Cache the response
-          await setCachedLLMResponse(promptString, responseText);
+          try {
+            await setCachedLLMResponse(promptString, responseText);
+            console.log('Cache write successful');
+          } catch (err) {
+            console.error('Error writing to llm_cache:', err);
+          }
         } catch (err) {
           console.log('chat-stream-executor: error generating code project json', err);
           responseText = "Unable to generate downloadable project code due to AI response processing error.\n\nPlease raise an issue in the github repo for this project and include a screenshot of your prompt.";
@@ -157,15 +162,30 @@ export async function generateStreamingLLMResponse(
               const { value, done } = await reader.read();
               if (done) break;
               controller.enqueue(value);
+              // Extract text content from chunk
+              let chunkStr = '';
               if (typeof value === 'string') {
-                fullResponse += value;
-              } else if (value && value.toString) {
-                fullResponse += value.toString();
+                chunkStr = value;
+              } else if (value && typeof value === 'object') {
+                const chunkObj = value as any;
+                if (chunkObj.kwargs && typeof chunkObj.kwargs === 'object' && 'content' in chunkObj.kwargs) {
+                  chunkStr = typeof chunkObj.kwargs.content === 'string' ? chunkObj.kwargs.content : '';
+                } else if ('content' in chunkObj) {
+                  chunkStr = typeof chunkObj.content === 'string' ? chunkObj.content : '';
+                } else {
+                  chunkStr = `[Unparseable chunk: ${JSON.stringify(value).substring(0, 100)}...]`;
+                }
               }
+              fullResponse += chunkStr;
             }
             controller.close();
             // Cache the full response
-            await setCachedLLMResponse(promptString, fullResponse);
+            try {
+              await setCachedLLMResponse(promptString, fullResponse);
+              console.log('Cache write successful');
+            } catch (err) {
+              console.error('Error writing to llm_cache:', err);
+            }
           }
         });
       }
