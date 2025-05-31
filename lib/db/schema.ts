@@ -9,6 +9,7 @@ import {
   primaryKey,
   foreignKey,
   boolean,
+  serial
 } from 'drizzle-orm/pg-core';
 
 export const user = pgTable('User', {
@@ -150,3 +151,13 @@ export const suggestion = pgTable(
 );
 
 export type Suggestion = InferSelectModel<typeof suggestion>;
+
+export const llmCache = pgTable('llm_cache', {
+  id: serial('id').primaryKey(), // Use serial for auto-incrementing integer
+  promptHash: varchar('prompt_hash', { length: 64 }).notNull().unique(),
+  prompt: text('prompt').notNull(),
+  response: text('response').notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export type LLMCache = InferSelectModel<typeof llmCache>;
