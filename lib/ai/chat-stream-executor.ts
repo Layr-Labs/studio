@@ -102,6 +102,7 @@ export async function generateStreamingLLMResponse(
       const cachedResponse = await getCachedLLMResponse(promptString);
       if (cachedResponse) {
         console.log('chat-stream-executor: cached response found');
+        
         responseText = cachedResponse;
       } else {
         console.log('chat-stream-executor: No cached response found');
@@ -145,6 +146,11 @@ export async function generateStreamingLLMResponse(
       // Try cache first for non-code generation
       const cachedResponse = await getCachedLLMResponse(promptString);
       if (cachedResponse) {
+        // Wait for 3 seconds before proceeding if cached response is found
+        function wait(ms: number) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        await wait(3000);
         llmResponseStream = new ReadableStream({
           start(controller) {
             controller.enqueue(cachedResponse);
