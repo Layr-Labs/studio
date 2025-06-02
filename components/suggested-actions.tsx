@@ -43,26 +43,26 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
     // },
     {
       title: 'Step 1: Refine an AVS idea',
-      label: STAGE1_TEST_PROMPT1.substring(0, 80) + '...',
+      label: STAGE1_TEST_PROMPT1.substring(0, 100) + '...',
       action: STAGE1_TEST_PROMPT1,
       initialIntent: UserIntent.RefineIdea
     },
     {
       title: 'Step 2: Generate a Design tech spec',
-      label: STAGE2_TEST_PROMPT1.substring(0, 80) + '...',
+      label: STAGE2_TEST_PROMPT1.substring(0, 100) + '...',
       action: STAGE2_TEST_PROMPT1,
       initialIntent: UserIntent.GenerateDesign
     },
     {
       title: 'Step 3: Generate task list to build my AVS design prototype',
-      label: STAGE3_TEST_PROMPT1.substring(0, 80) + '...',
+      label: STAGE3_TEST_PROMPT1.substring(0, 100) + '...',
       action: STAGE3_TEST_PROMPT1,
       initialIntent: UserIntent.GenerateTaskList
     },
 
     {
       title: 'Step 4: Generate code for my AVS based on task list',
-      label: STAGE3_TEST_PROMPT2.substring(0, 80) + '...',
+      label: STAGE3_TEST_PROMPT2.substring(0, 100) + '...',
       action: STAGE3_TEST_PROMPT2,
       initialIntent: UserIntent.GenerateCode
     },
@@ -97,7 +97,7 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
                 },
               );
             }}
-            className="text-left border rounded-xl px-4 py-3.5 text-sm flex-1 gap-1 sm:flex-col w-full h-auto justify-start items-start"
+            className="text-left border rounded-xl px-4 py-2.5 text-sm flex-1 gap-1 sm:flex-col w-full h-auto justify-start items-start"
           >
             <span className="font-medium">{suggestedAction.title}</span>
             <span className="text-muted-foreground">
