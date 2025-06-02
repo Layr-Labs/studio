@@ -11,7 +11,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 import type { VisibilityType } from './visibility-selector';
 import { ModelSelector } from './model-selector';
 import { SidebarUserNav } from '@/components/sidebar-user-nav';
-import { HelpCircle, Menu, SquareMenu } from 'lucide-react';
+import { HelpCircle, Menu, SquareMenu, Check } from 'lucide-react';
 import type { User } from 'next-auth';
 import { EIGEN_LAYER_AVS_FORM_URL } from '@/lib/constants';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent } from '@/components/ui/dropdown-menu';
@@ -134,6 +134,9 @@ function PureChatHeader({
                 <DropdownMenuItem onSelect={() => window.open('/studio-terms', '_blank')}>
                   EigenLayer Studio Terms of Use
                 </DropdownMenuItem>
+                <DropdownMenuItem onSelect={() => window.open('/llm-disclosure', '_blank')}>
+                  LLM Disclosure
+                </DropdownMenuItem>
                 <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/privacy-policy', '_blank')}>
                   EigenLayer Privacy Policy
                 </DropdownMenuItem>
@@ -147,12 +150,15 @@ function PureChatHeader({
               <DropdownMenuSubContent>
                 <DropdownMenuItem onSelect={() => setTheme('dark')}>
                   Dark
+                  {theme === 'dark' && <Check className="ml-auto h-4 w-4" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={() => setTheme('light')}>
                   Light
+                  {theme === 'light' && <Check className="ml-auto h-4 w-4" />}
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={() => setTheme('system')}>
                   Auto
+                  {theme === 'system' && <Check className="ml-auto h-4 w-4" />}
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuSub>
