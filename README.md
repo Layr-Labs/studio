@@ -14,7 +14,7 @@
 
 ## Overview
 
-EigenLayer Studio is an AI-powered tool that enables developers to go from idea to working AVS (Actively Validated Service) prototype in minutes. Whether you're experimenting or preparing for production, Studio accelerates AVS development using guided workflows and generative AI tooling.
+EigenLayer Studio is an AI-powered tool that enables developers to go from idea to working AVS (Autonomous Verifiable Service) prototype in minutes. Whether you're experimenting or preparing for production, Studio accelerates AVS development using guided workflows and generative AI tooling.
 
 ### Project Goals
 - "**Anyone** can build an [AVS on EigenLayer](https://docs.eigenlayer.xyz/developers/Concepts/avs-developer-guide) leveraging the power of AI first tooling"
