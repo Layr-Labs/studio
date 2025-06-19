@@ -137,10 +137,10 @@ function PureChatHeader({
                 <DropdownMenuItem onSelect={() => window.open('/llm-disclosure', '_blank')}>
                   LLM Disclosure
                 </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/privacy-policy', '_blank')}>
+                <DropdownMenuItem onSelect={() => window.open('https://docs.eigencloud.xyz/products/eigenlayer/legal/terms-of-service', '_blank')}>
                   EigenLayer Privacy Policy
                 </DropdownMenuItem>
-                <DropdownMenuItem onSelect={() => window.open('https://docs.eigenlayer.xyz/eigenlayer/legal/terms-of-service', '_blank')}>
+                <DropdownMenuItem onSelect={() => window.open('https://docs.eigencloud.xyz/products/eigenlayer/legal/terms-of-service', '_blank')}>
                   EigenLayer Terms of Service
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
