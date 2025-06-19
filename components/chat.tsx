@@ -116,7 +116,7 @@ export function Chat({
           )}
         </form>
         <div className="w-1/2 md:max-w-3xl mx-auto px-4 text-xs text-muted-foreground text-center" style={{ minHeight: '20px', marginBottom: '8px' }}>
-          By using the EigenLayer Studio, you agree to our <a href="/studio-terms" className="underline hover:text-primary" target="_blank">EigenLayer Studio Terms of Use</a>, <a href="https://docs.eigenlayer.xyz/eigenlayer/legal/terms-of-service" className="underline hover:text-primary" target="_blank" rel="noopener noreferrer">EigenLayer Terms of Service</a>, and acknowledge our <a href="https://docs.eigenlayer.xyz/eigenlayer/legal/privacy-policy" className="underline hover:text-primary" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+          By using the EigenLayer Studio, you agree to our <a href="/studio-terms" className="underline hover:text-primary" target="_blank">EigenLayer Studio Terms of Use</a>, <a href="https://docs.eigencloud.xyz/products/eigenlayer/legal/terms-of-service" className="underline hover:text-primary" target="_blank" rel="noopener noreferrer">EigenLayer Terms of Service</a>, and acknowledge our <a href="https://docs.eigencloud.xyz/products/eigenlayer/legal/terms-of-service" className="underline hover:text-primary" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
         </div>
       </div>
 
